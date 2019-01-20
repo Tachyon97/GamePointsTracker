@@ -18,3 +18,4 @@ Initial design
 
 ## MIT License
 Project is under MIT License, please read license file.
+[Click here](https://github.com/Tachyon97/GamePointsTracker/blob/master/LICENSE)
