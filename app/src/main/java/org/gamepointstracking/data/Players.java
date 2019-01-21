@@ -14,6 +14,9 @@ public class Players {
     public String getUser() {
         return user;
     }
+    public int getScore() {
+        return points;
+    }
     public void incrementScore() {
         points++;
     }
@@ -22,5 +25,10 @@ public class Players {
     }
     public void customScore(int score) {
         points += score;
+    }
+
+    @Override
+    public String toString() {
+        return "Player: " + user + " Points: " + getScore();
     }
 }

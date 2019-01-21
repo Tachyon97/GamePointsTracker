@@ -1,18 +1,22 @@
 package org.gamepointstracking;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-import org.gamepointstracking.data.PlayerDataManagement;
+import org.gamepointstracking.data.PlayerCount;
 import org.gamepointstracking.data.Players;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText fieldInputOne, fieldInputTwo, fieldInputThree, fieldInputFour;
-    PlayerDataManagement management = new PlayerDataManagement();
-
+    public Players[] players = new Players[4];
+    public PlayerCount count = new PlayerCount();
+    ArrayList<String> loadout = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,31 +31,44 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         PlayerManager();
-        log("There are currently: " + management.count.getCount() + " players registered");
-        if(management.count.getCount() != 0)
-            management.count.setCount(0);
+        try {
+            Intent intent = new Intent(this, PlayerDisplay.class);
+            intent.putExtra("Players", loadout);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
     }
 
     private void PlayerManager() {
         if (fieldInputOne.getText().length() > 1) {
-            management.players[0] = new Players(fieldInputOne.getText().toString());
-            management.count.incrementCount();
-            log(management.players[0].getUser() + " successfully loaded");
+            players[0] = new Players(fieldInputOne.getText().toString());
+            count.incrementCount();
+            loadout.add(players[0].toString());
+            log(players[0].getUser() + " successfully loaded");
         }
         if (fieldInputTwo.getText().length() > 1) {
-            management.players[1] = new Players(fieldInputTwo.getText().toString());
-            management.count.incrementCount();
-            log(management.players[1].getUser() + " successfully loaded");
+            players[1] = new Players(fieldInputTwo.getText().toString());
+            count.incrementCount();
+            loadout.add(players[1].toString());
+            log(players[1].getUser() + " successfully loaded");
+
         }
         if (fieldInputThree.getText().length() > 1) {
-            management.players[2] = new Players(fieldInputThree.getText().toString());
-            management.count.incrementCount();
-            log(management.players[2].getUser() + " successfully loaded");
+            players[2] = new Players(fieldInputThree.getText().toString());
+            count.incrementCount();
+            loadout.add(players[2].toString());
+            log(players[2].getUser() + " successfully loaded");
         }
         if (fieldInputFour.getText().length() > 1) {
-            management.players[3] = new Players(fieldInputFour.getText().toString());
-            management.count.incrementCount();
-            log(management.players[3].getUser() + " successfully loaded");
+            players[3] = new Players(fieldInputFour.getText().toString());
+            count.incrementCount();
+            loadout.add(players[3].toString());
+            log(players[3].getUser() + " successfully loaded");
         }
     }
 
