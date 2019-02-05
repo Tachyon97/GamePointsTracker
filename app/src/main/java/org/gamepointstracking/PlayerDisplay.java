@@ -1,27 +1,36 @@
 package org.gamepointstracking;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import org.gamepointstracking.data.Players;
-
-import java.util.ArrayList;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.TextView;
 
 public class PlayerDisplay extends AppCompatActivity {
+
+    Players[] players = new Players[4];
+    TextView pOne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_display);
-        ListView playerList = findViewById(R.id.playerListView);
-        Intent intent = getIntent();
-        String [] stringArray = intent.getStringArrayExtra("Players");
+        pOne = findViewById(R.id.playerOne);
+        //Bundle extras = getIntent().getExtras();
+       Intent intent = getIntent();
 
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(PlayerDisplay.this, 0, stringArray);
-        //playerList.setAdapter(adapter);
+        if(intent != null) {
+
+           Log.e("UserOne", intent.getStringExtra("userOne"));
+            /* Log.e("UserTwo", extras.getString("UserTwo"));
+            Log.e("userThree", extras.getString("userThree"));
+            Log.e("userFour", extras.getString("userFour"));
+            players[0].setUser(extras.getString("userOne"));
+            pOne.setText(players[0].getUser());
+            players[1].setUser(extras.getString("userTwo"));
+            players[2].setUser(extras.getString("userThree"));
+            players[3].setUser(extras.getString("userFour")); */
+        }
 
     }
 }

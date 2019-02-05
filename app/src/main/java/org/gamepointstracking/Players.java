@@ -1,4 +1,4 @@
-package org.gamepointstracking.data;
+package org.gamepointstracking;
 
 public class Players {
     int points;
