@@ -1,14 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".icon">
+    android:layout_height="wrap_content"
+    android:background="@drawable/background"
+    tools:context=".collections.activities.ProfileCustomization">
 
-    <!-- TODO: Update blank fragment layout -->
+
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/title"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/changeUser"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="84dp"
+        android:text="@string/changeUser"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/setPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginLeft="188dp"
+        android:layout_marginTop="84dp"
+        android:text="@string/setPoints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/userProfile"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.132" />
+
+    <RelativeLayout
+
+        android:id="@+id/selection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="108dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <ImageView
+            android:id="@+id/firstImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:contentDescription="TODO"
+            android:src="@color/coldBlue"
+            android:layout_marginLeft="10dip"/>
+
+        <ImageView
+            android:id="@+id/secondImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_toRightOf="@id/firstImage"
+            android:src="@color/colorAccent" />
+
+        <ImageView
+            android:id="@+id/thirdImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_toRightOf="@id/secondImage"
+            android:src="@color/colorPrimaryDark" />
+
+        <ImageView
+            android:id="@+id/fourthImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_toRightOf="@id/thirdImage"
+            android:src="@color/design_default_color_primary_dark"
+            android:layout_marginRight="10dip"/>
+
+        <ImageView
+            android:id="@+id/fifthImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_below="@id/firstImage"
+            android:src="@drawable/user"
+            android:layout_marginLeft="10dip"/>
+
+        <ImageView
+            android:id="@+id/sixthImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_below="@id/firstImage"
+            android:layout_toRightOf="@id/firstImage"
+            android:src="@drawable/soccer_user" />
+
+        <ImageView
+            android:id="@+id/seventhImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_below="@id/firstImage"
+            android:layout_toRightOf="@id/sixthImage"
+            android:src="@drawable/user_veganshoes" />
+
+        <ImageView
+            android:id="@+id/eightImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_below="@id/firstImage"
+            android:layout_toRightOf="@id/seventhImage"
+            android:src="@drawable/userguard"
+            android:layout_marginRight="10dip"/>
+
+        <TextView
+            android:id="@+id/applySettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fifthImage"
+            android:text="Apply settings"
+            android:layout_marginLeft="10dip"/>
+
+        <ImageView
+            android:id="@+id/displayBackground"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_below="@id/applySettings"
+            android:src="@color/coldBlue"
+            android:layout_marginLeft="10dip"/>
+
+        <ImageView
+            android:id="@+id/displayImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_below="@id/applySettings"
+            android:src="@drawable/user"
+            android:layout_marginLeft="10dip"/>
+
+        <Button
+            android:id="@+id/lockSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_below="@id/applySettings"
+            android:layout_toRightOf="@id/displayImage"
+            android:text="@string/applySettings"
+            android:layout_marginBottom="10dip" />
+
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>

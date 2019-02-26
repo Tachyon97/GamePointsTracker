@@ -1,100 +1,126 @@
-package org.gamepointstracking
+package org.gamepointstracking;
 
-import android.content.DialogInterface
-import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.text.InputType
-import android.view.View
-import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.ListView
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import org.gamepointstracking.collections.CustomSharedPreference
-import org.gamepointstracking.collections.PersonAdapter
-import org.gamepointstracking.collections.Players
+import org.gamepointstracking.collections.CustomSharedPreference;
+import org.gamepointstracking.collections.PersonAdapter;
+import org.gamepointstracking.collections.Players;
+import org.gamepointstracking.collections.activities.Settings;
 
-import java.lang.reflect.Type
-import java.util.ArrayList
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
-class MainActivity : AppCompatActivity() {
+public class MainActivity extends AppCompatActivity {
 
-    private var users: ArrayList<Players>? = ArrayList()
-    internal var list: ListView
-    private var gson: Gson? = null
-    private var preference: CustomSharedPreference? = null
+    private ArrayList<Players> users = new ArrayList<>();
+    ListView list;
+    private Gson gson;
+    private CustomSharedPreference preference;
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        gson = Gson()
-        preference = CustomSharedPreference(this)
-        retrieveUsers()
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        list = findViewById(R.id.userList);
+        gson = new Gson();
+        preference = new CustomSharedPreference(this);
+        retrieveUsers();
+
+        setContentView(R.layout.activity_main);
+    }
+
+    public void addUserButton(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final PersonAdapter adapter = new PersonAdapter(this, users);
+        list = findViewById(R.id.userList);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                users.get(position);
+            }
+        });
+        builder.setTitle(getResources().getString(R.string.addDescription));
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        builder.setPositiveButton(getResources().getText(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                users.add(new Players(input.getText().toString()));
+                save(users);
+            }
+        });
+        builder.setNegativeButton(getResources().getText(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        list.setAdapter(adapter);
+        builder.show();
 
     }
 
-    fun addUserButton(view: View) {
-        val adapter = PersonAdapter(this, users)
-        val builder = AlertDialog.Builder(this)
-        list = findViewById(R.id.userList)
-        list.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id -> users!![position] }
-        builder.setTitle(resources.getString(R.string.addDescription))
-        val input = EditText(this)
-        input.inputType = InputType.TYPE_CLASS_TEXT
-        builder.setView(input)
-        builder.setPositiveButton(resources.getText(R.string.ok)) { dialog, which ->
-            users!!.add(Players(input.text.toString()))
-            save(users)
-        }
-        builder.setNegativeButton(resources.getText(R.string.cancel)) { dialog, which -> dialog.cancel() }
-        builder.show()
-        list.adapter = adapter
-        adapter.notifyDataSetChanged()
 
-    }
-
-    fun removeUserButton(view: View) {
-        list = findViewById(R.id.userList)
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(resources.getString(R.string.removeDescription))
-        val input = EditText(this)
-        input.inputType = InputType.TYPE_CLASS_TEXT
-        builder.setView(input)
-        builder.setPositiveButton(resources.getText(R.string.ok)) { dialog, which ->
-            if (users!!.contains(input.text.toString())) {
-                if (getIndex(input.text.toString()) != -1) {
-                    users!!.removeAt(getIndex(input.text.toString()))
+    public void removeUserButton(View view) {
+        list = findViewById(R.id.userList);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getResources().getString(R.string.removeDescription));
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        builder.setPositiveButton(getResources().getText(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (users.contains(input.getText().toString())) {
+                    if (getIndex(input.getText().toString()) != -1) {
+                        users.remove(getIndex(input.getText().toString()));
+                    }
                 }
             }
+        });
+        builder.show();
+    }
+
+    private int getIndex(String user) {
+        for (Players p : users) {
+            if (p.getUser().equals(user))
+                return users.indexOf(p);
         }
-        builder.show()
+        return -1;
     }
 
-    private fun getIndex(user: String): Int {
-        for (p in users!!) {
-            if (p.user == user)
-                return users!!.indexOf(p)
-        }
-        return -1
+    private void save(ArrayList<Players> players) {
+        String jsonUsers = gson.toJson(players);
+        preference.saveUsers(jsonUsers);
     }
 
-    private fun save(players: ArrayList<Players>?) {
-        val jsonUsers = gson!!.toJson(players)
-        preference!!.saveUsers(jsonUsers)
-    }
-
-    private fun retrieveUsers() {
-        val jsonUsers = preference!!.users
-        val type = object : TypeToken<List<Players>>() {
-
-        }.type
-        users = gson!!.fromJson<ArrayList<Players>>(jsonUsers, type)
+    private void retrieveUsers() {
+        String jsonUsers = preference.getUsers();
+        Type type = new TypeToken<List<Players>>() {
+        }.getType();
+        users = gson.fromJson(jsonUsers, type);
         if (users == null) {
-            users = ArrayList()
+            users = new ArrayList<>();
         }
     }
+
+    public void openSettings(View view) {
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+
 }

@@ -1,4 +1,4 @@
-package org.gamepointstracking;
+package org.gamepointstracking.collections;
 
 public class Players {
     int points;
@@ -23,8 +23,8 @@ public class Players {
     public void decrementScore() {
         points--;
     }
-    public void customScore(int score) {
-        points += score;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     @Override

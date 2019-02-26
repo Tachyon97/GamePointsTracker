@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">GamePointsTracker</string>
+    <string name="player">Spelare</string>
+    <string name="hint">användarnamn</string>
+    <string name="settings">inställningar</string>
+    <string name="button">Starta spelet</string>
+    <string name="lang">Språk</string>
+    <string name="addDescription">Lägg användare</string>
+    <string name="removeDescription">Ta bort användare</string>
+    <string name="score">poäng</string>
+    <string name="ok">ok</string>
+    <string name="cancel">avbryt</string>
+    <string name="applySettings">Lås inställningar</string>
+    <string name="reset">Återställ</string>
+    <string name="setPoints">Sätt Poäng</string>
+    <string name="userProfile">Användar Profil</string>
+    <string name="changeUser">Ändra användarnamn</string>
+
+</resources>
