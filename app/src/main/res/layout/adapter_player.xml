@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/userImage"
+        android:layout_width="65dp"
+        android:layout_height="75dp"
+        android:src="@drawable/user"/>
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/userImage" />
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/player"
+        android:layout_toRightOf="@id/userImage"
+        android:layout_below="@id/username"
+        android:textSize="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+    <Button
+        android:id="@+id/plusButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:text="@string/plus"
+        android:textSize="25dp"/>
+        <Button
+            android:id="@+id/minusButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_toRightOf="@id/plusButton"
+            android:text="@string/minus"
+            android:textSize="25dp"/>
+        <Button
+            android:id="@+id/customButton"
+            android:layout_width="85dp"
+            android:layout_height="75dp"
+            android:layout_toRightOf="@id/minusButton"
+            android:text="@string/custom"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+</RelativeLayout>
